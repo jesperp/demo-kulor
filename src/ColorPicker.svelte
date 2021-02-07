@@ -1,11 +1,12 @@
 <script lang='typescript'>
 	import iro from '@jaames/iro'
-	import { palette, defaultHue } from './store'
+	import { store, defaultHue } from './store'
 
 	let picker:iro.ColorPicker | undefined
+	const { selected } = store
 
 	function colorChanged(color:iro.Color) {
-		palette.setCurrentHue(color.hue)
+		store.setCurrentHue(color.hue)
 	}
 
 	function pickerAction(node:HTMLElement) {
@@ -30,12 +31,10 @@
 			}
 		}
 	}
-
 $: {
 	// When a new color is selected, update the picker to match selected hue
-	const selected = $palette.selected
-	if (selected !== undefined && picker) {
-		picker.color.set(`hsl(${$palette.colors[selected].hue || defaultHue}, 50%, 100%)`)
+	if ($selected !== undefined && picker) {
+		picker.color.set(`hsl(${$selected?.hue || defaultHue}, 50%, 100%)`)
 	}	
 }
 

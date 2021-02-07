@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
 export type Hue = number
 
@@ -36,13 +36,30 @@ export const shades:Array<Shade> = [
 
 export const defaultHue = 0
 
-function createPaletteStore() {
-	const { subscribe, update } = writable<Palette>({ colors: [] })
+function createStore() {
+	const palette = writable<Palette>({ colors: [] })
+
+	const exportModal = writable<boolean>(false)
+
+	// Derive currently selected color
+	const selected = derived(palette,
+		$palette =>
+			$palette.selected !== undefined ? $palette.colors[$palette.selected]:undefined
+	)
 
 	return {
-		subscribe,
+		// Make direct store access readonly from outside
+		palette: { subscribe: palette.subscribe },
+		selected: { subscribe: selected.subscribe },
+		exportModal: { subscribe: exportModal.subscribe },
 
-		addColor: () => update(
+		//
+		// Public "API"
+		//
+		showExport: () => exportModal.set(true),
+		closeExport: () => exportModal.set(false),
+
+		addColor: () => palette.update(
 			palette => {
 				const defaultColor = {
 					hue: defaultHue,
@@ -56,9 +73,7 @@ function createPaletteStore() {
 				}
 			}
 		),
-
-		// Update hue on currently selected color
-		setCurrentHue: (hue:Hue) => update(
+		setCurrentHue: (hue:Hue) => palette.update(
 			palette => ({
 				...palette,
 				colors: palette.colors.map(
@@ -66,8 +81,7 @@ function createPaletteStore() {
 				)
 			})
 		),
-
-		setSelected: (index:number) => update(
+		setSelected: (index:number) => palette.update(
 			palette =>
 				(typeof palette.colors[index] !== undefined)
 					? ({ ...palette, selected: index }) : palette
@@ -75,18 +89,4 @@ function createPaletteStore() {
 	};
 }
 
-export const palette = createPaletteStore();
-
-
-// Store for export modal (true=visible, false=hidden)
-function createExportModalStore() {
-	const { subscribe, set, update } = writable<boolean>(false)
-	return {
-		subscribe,
-		toggle: () => update( visible => !visible ),
-		close: () => set(false),
-	}
-}
-
-export const exportModalState = createExportModalStore()
-
+export const store = createStore();

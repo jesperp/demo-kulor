@@ -1,22 +1,24 @@
 <script lang='typescript'>
-	import { shades, palette, exportModalState } from './store'
-	import type { PaletteColor, Shade } from './store'
+	import { fade } from 'svelte/transition';
+	import { shades, store } from './store'
 
+	const { palette } = store
 </script>
 
 <div
 	style="background-color: rgba(0, 0, 0, 0.6);"
 	class="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen overlay "
-	on:mousedown={ exportModalState.close }
+	on:mousedown={ store.closeExport }
 	>
 
 	<section
 	 on:mousedown={ e => e.stopPropagation() }
+	 in:fade
 	 style="max-width:700px; min-width:300px;"
  	 class="relative p-4 px-4 mx-4 text-sm text-black bg-white shadow-md opacity-100 rounded-md"
 	 >
 
-	<button title="Close window" class="absolute top-2 right-2 " on:click={ exportModalState.close }>
+	<button title="Close window" class="absolute top-2 right-2 " on:click={ store.closeExport }>
 		<svg width="25" height="25" class="" viewBox="0 0 20 20" fill="currentColor">
 			<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
 		</svg>
