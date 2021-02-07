@@ -1,3 +1,5 @@
+https://jesperpetersen.se/demo-kulor/
+
 ![Screenshot of Kulör](kulor-screenshot.png?raw=true "Kulör palette generator")
 
 Kulör is a simple palette generator that exports to CSS. This is a work in progress!
