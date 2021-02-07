@@ -16,12 +16,14 @@
 			Kulör
 		</h1>
 
+		<!-- Add-color button -->
 		<button class="mb-2" title="Add new color" on:click={ store.addColor }>
 			<svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
 			</svg>
 		</button>
 
+		<!-- Show-export-modal button -->
 		<button class="mb-2" title="Show CSS/Tailwind config" on:click={ store.showExport }>
 			<svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
@@ -52,7 +54,6 @@
 		{/if}
   </section>
 
-	<!-- Export to CSS/Tailwnd modal (if visible) -->
 	{#if $exportModal }
 		<Export />
 	{/if}

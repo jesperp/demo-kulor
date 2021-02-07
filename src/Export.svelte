@@ -11,6 +11,7 @@
 	on:mousedown={ store.closeExport }
 	>
 
+	<!-- Export "window" -->
 	<section
 	 on:mousedown={ e => e.stopPropagation() }
 	 in:fade
