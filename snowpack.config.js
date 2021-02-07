@@ -8,6 +8,7 @@ module.exports = {
     '@snowpack/plugin-svelte',
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
+    ['@snowpack/plugin-webpack', {}],
   ],
   devOptions: {
     /* ... */
@@ -15,6 +16,7 @@ module.exports = {
   },
   buildOptions: {
     /* ... */
+    "baseUrl": "/demo-kulor"
   },
   alias: {
     /* ... */
