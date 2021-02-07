@@ -33,8 +33,9 @@
 	}
 $: {
 	// When a new color is selected, update the picker to match selected hue
-	if ($selected !== undefined && picker) {
-		picker.color.set(`hsl(${$selected?.hue || defaultHue}, 50%, 100%)`)
+	const current = $selected
+	if (current !== undefined && picker) {
+		picker.color.set(`hsl(${current.hue}, 50%, 100%)`)
 	}	
 }
 

@@ -59,6 +59,7 @@ function createStore() {
 		// Public "API"
 		//
 		showExport: () => exportModal.set(true),
+
 		closeExport: () => exportModal.set(false),
 
 		addColor: () => palette.update(
@@ -76,6 +77,7 @@ function createStore() {
 				}
 			}
 		),
+
 		setCurrentHue: (hue:Hue) => palette.update(
 			palette => ({
 				...palette,
@@ -84,10 +86,11 @@ function createStore() {
 				)
 			})
 		),
+
 		setSelected: (id:PaletteColorId) => palette.update(
 			palette => ({ ...palette, selected: id })
 	  ),
-	};
+	}
 }
 
-export const store = createStore();
+export const store = createStore()

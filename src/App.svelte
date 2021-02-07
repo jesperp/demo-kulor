@@ -11,7 +11,6 @@
 <main class="relative flex flex-col h-full p-4 text-white bg-gray-900">
 
   <section class="flex flex-wrap items-center justify-center pb-2 space-x-2">
-
 		<h1 class="mb-2 text-2xl sm:text-3xl">
 			Kulör
 		</h1>
@@ -33,8 +32,8 @@
 		<div class="mb-2">
 			<ColorPicker />
 		</div>
-
   </section>
+
 
   <section class="flex h-full mx-1 space-x-1">
 		{#if $palette.colors.length === 0 }
