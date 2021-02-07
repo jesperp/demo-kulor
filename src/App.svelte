@@ -47,7 +47,7 @@
 			</div>
 		{:else}
 			<!-- Show palette -->
-			{#each $palette.colors as color }
+			{#each $palette.colors as color (color.id) }
 				<PaletteColor color={color} />
 			{/each}
 		{/if}

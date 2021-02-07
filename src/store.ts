@@ -1,8 +1,8 @@
 import { writable, derived } from 'svelte/store';
 import { nanoid } from 'nanoid'
 
-export type Hue = number
-export type PaletteColorId = ReturnType<typeof nanoid>
+type Hue = number
+type PaletteColorId = ReturnType<typeof nanoid>
 
 export interface PaletteColor {
 	id: PaletteColorId,
@@ -41,7 +41,6 @@ export const defaultHue = 0
 
 function createStore() {
 	const palette = writable<Palette>({ colors: [] })
-
 	const exportModal = writable<boolean>(false)
 
 	// Derive currently selected color
