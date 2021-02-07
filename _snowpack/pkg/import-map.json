@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@jaames/iro": "./@jaames/iro.js",
+    "nanoid": "./nanoid.js",
+    "svelte/internal": "./svelte/internal.js",
+    "svelte/store": "./svelte/store.js",
+    "svelte/transition": "./svelte/transition.js"
+  }
+}
