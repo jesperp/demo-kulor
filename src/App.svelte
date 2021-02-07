@@ -36,7 +36,6 @@
 
   </section>
 
-
   <section class="flex h-full mx-1 space-x-1">
 		{#if $palette.colors.length === 0 }
 			<!-- Show intro screen -->
@@ -48,8 +47,8 @@
 			</div>
 		{:else}
 			<!-- Show palette -->
-			{#each $palette.colors as color, index}
-				<PaletteColor index={index} color={color} />
+			{#each $palette.colors as color }
+				<PaletteColor color={color} />
 			{/each}
 		{/if}
   </section>

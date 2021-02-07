@@ -36,7 +36,7 @@
 	":root{\n" +
 	$palette.colors.map(
 		color =>
-			`\t--base-${color.name}: ${color.hue};\n` +   // E.g: --base-color1: 180;
+			`\t--base-${color.name}: ${color.hue.toFixed(1)};\n` +   // E.g: --base-color1: 180;
 
 			shades.map( shade =>
 				// E.g: --color1-500: hsl(var(--base-color1), 100%, 90%);

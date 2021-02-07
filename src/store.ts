@@ -1,8 +1,11 @@
 import { writable, derived } from 'svelte/store';
+import { nanoid } from 'nanoid'
 
 export type Hue = number
+export type PaletteColorId = ReturnType<typeof nanoid>
 
 export interface PaletteColor {
+	id: PaletteColorId,
 	hue: Hue,			// The H in HSL
 	name: string,
 }
@@ -15,7 +18,7 @@ export interface Shade {
 
 type Palette = {
 	colors: Array<PaletteColor>,
-	selected?: number,
+	selected?: PaletteColorId,
 }
 
 
@@ -44,7 +47,7 @@ function createStore() {
 	// Derive currently selected color
 	const selected = derived(palette,
 		$palette =>
-			$palette.selected !== undefined ? $palette.colors[$palette.selected]:undefined
+			$palette.colors.find( color => color.id == $palette.selected)
 	)
 
 	return {
@@ -62,6 +65,7 @@ function createStore() {
 		addColor: () => palette.update(
 			palette => {
 				const defaultColor = {
+					id: nanoid(),
 					hue: defaultHue,
 					// TODO Nicer default names primary, secondary, tertiary, etc
 					name: `color${palette.colors.length+1}`,
@@ -69,7 +73,7 @@ function createStore() {
 				return {
 					...palette,
 					colors: [...palette.colors, defaultColor],
-					selected: palette.colors.length,
+					selected: defaultColor.id,
 				}
 			}
 		),
@@ -77,14 +81,12 @@ function createStore() {
 			palette => ({
 				...palette,
 				colors: palette.colors.map(
-					(color, i) => (i === palette.selected) ? { ...color, hue }:color
+					(color) => (color.id === palette.selected) ? { ...color, hue }:color
 				)
 			})
 		),
-		setSelected: (index:number) => palette.update(
-			palette =>
-				(typeof palette.colors[index] !== undefined)
-					? ({ ...palette, selected: index }) : palette
+		setSelected: (id:PaletteColorId) => palette.update(
+			palette => ({ ...palette, selected: id })
 	  ),
 	};
 }

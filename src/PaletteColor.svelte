@@ -4,11 +4,10 @@
 	import { shades, store } from './store'
 
 	export let color:PaletteColor
-	export let index:number
 
 	const { palette } = store
 
-	$: selected = $palette.selected === index
+	$: selected = $palette.selected === color.id
 </script>
 
 <style>
@@ -21,7 +20,7 @@
 	in:fade
 	class:selected
 	class="flex flex-col flex-grow ring-0 ring-gray-100 ring-white"
- on:click={ () => { console.log("setSelected(index)", index); store.setSelected(index) } }
+ on:click={ () => { store.setSelected(color.id) } }
 	>
 	{#each shades as shade}
 		<div
