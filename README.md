@@ -1,8 +1,6 @@
-## Kulör
-
 ![Screenshot of Kulör](kulor-screenshot.png?raw=true "Kulör palette generator")
 
-A simple palette generator that exports to CSS. This is a work in progress!
+Kulör is a simple palette generator that exports to CSS. This is a work in progress!
 
 ### Run locally
 `npm run start`
